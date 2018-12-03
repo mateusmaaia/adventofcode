@@ -33,10 +33,10 @@ def santaClausChecksum(inputDay2):
         for eachLetter in letters:
             count = value.count(eachLetter)
             if count == 2 and twoOnce == False:
-                twoCount = twoCount + 1
+                twoCount += 1
                 twoOnce = True
             elif count == 3 and threeOnce == False:
-                threeCount = threeCount + 1
+                threeCount += 1
                 threeOnce = True
 
     return(twoCount * threeCount)

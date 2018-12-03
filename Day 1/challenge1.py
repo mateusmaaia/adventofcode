@@ -28,7 +28,7 @@ x = (+9,+15,-14,+10,+13,+15,+10,-16,-5,+2,+8,+7,-4,+11,+7,+10,-9,+15,-10,+12,-5,
 
 def checkingList(x, final):
     for value in x:
-        final = final + value
+        final += value
     return final
 
 print(checkingList(x, 0))

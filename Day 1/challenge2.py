@@ -26,7 +26,7 @@ frequencies = set()
 def checkingList(x, final):
     found_duplicate = False
     for value in x:
-        final = final + value
+        final += value
 
         if final in frequencies:
             found_duplicate = True
