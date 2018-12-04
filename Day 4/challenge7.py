@@ -60,3 +60,19 @@ with open('../Data/day4.txt') as f:
 
     log_tuples = sorted(log_tuples, key=lambda x: x[0])
     log_tuples = [(x[0].strftime('[%Y-%m-%d %H:%M]'), x[1]) for x in log_tuples]
+
+def timeAsleep(records):
+    newTurn = False
+    regex = re.compile(r'\#([^\s]+)')
+    timeRegex = re.compile(r'\:(\d{2})')
+    for value in records:
+        if value[1].count('Guard'):
+            if newTurn == False:
+                guardCode = regex.search(value[1]).group(1)
+        # elif value[1].count('asleep'):
+        #     totalTime = 
+        # elif value[1].count('wakes'):
+
+    print(guardCode)
+
+timeAsleep(log_tuples)
