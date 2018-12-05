@@ -47,32 +47,40 @@
 # While this example listed the entries in chronological order, your entries are in the order you found them. You'll need to organize them before they can be analyzed.
 
 # What is the ID of the guard you chose multiplied by the minute you chose? (In the above example, the answer would be 10 * 24 = 240.)
-import re
-import datetime
+# Old sort
+# with open('../Data/day4.txt') as f:
+#     log_tuples = []
+#     regex = re.compile(r'(\[\d{4}-\d{2}-\d{2} \d{2}:\d{2}\]) (.*)')
+#     for r in f:
+#         t = regex.match(r).groups()
+#         d = datetime.datetime.strptime(t[0],'[%Y-%m-%d %H:%M]')
+#         log_tuples.append((d, t[1]))
 
-with open('../Data/day4.txt') as f:
-    log_tuples = []
-    regex = re.compile(r'(\[\d{4}-\d{2}-\d{2} \d{2}:\d{2}\]) (.*)')
-    for r in f:
-        t = regex.match(r).groups()
-        d = datetime.datetime.strptime(t[0],'[%Y-%m-%d %H:%M]')
-        log_tuples.append((d, t[1]))
+#     log_tuples = sorted(log_tuples, key=lambda x: x[0])
+#     log_tuples = [(x[0].strftime('[%Y-%m-%d %H:%M]'), x[1]) for x in log_tuples]
 
-    log_tuples = sorted(log_tuples, key=lambda x: x[0])
-    log_tuples = [(x[0].strftime('[%Y-%m-%d %H:%M]'), x[1]) for x in log_tuples]
+# Just for knowledge base 
+import collections
+lines = [line.strip() for line in open('../Data/day4.txt')]
 
-def timeAsleep(records):
-    newTurn = False
-    regex = re.compile(r'\#([^\s]+)')
-    timeRegex = re.compile(r'\:(\d{2})')
-    for value in records:
-        if value[1].count('Guard'):
-            if newTurn == False:
-                guardCode = regex.search(value[1]).group(1)
-        # elif value[1].count('asleep'):
-        #     totalTime = 
-        # elif value[1].count('wakes'):
+l = sorted(lines)
+guards = collections.defaultdict(lambda:[0 for x in range(60)])
+for s in l:
+	if s[25]=="#":
+		g=s.split()[3]
+	elif s[25]=="a":
+		st=int(s[15:17])
+	else: # wake up
+		t=int(s[15:17])
+		for x in range(st,t):
+			guards[g][x]+=1
 
-    print(guardCode)
+# part 1
+g1 = sorted(guards.keys(), key=lambda g:-sum(guards[g]))[0]
+# part 2
+g2 = sorted(guards.keys(), key=lambda g:-max(guards[g]))[0]
 
-timeAsleep(log_tuples)
+for g in [g1,g2]:
+	gh = guards[g]
+	minute = gh.index(max(gh))
+	print(int(g[1:])*minute)
