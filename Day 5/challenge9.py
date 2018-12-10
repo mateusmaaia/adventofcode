@@ -20,8 +20,19 @@
 # After all possible reactions, the resulting polymer contains 10 units.
 
 # How many units remain after fully reacting the polymer you scanned?
-
+from string import *
 letters = list(open('../Data/day5.txt').readlines()[0])
 
-polymer = map(lambda x: x)
-    
+
+def collapse(s):
+    p = ['.']
+    for u in s:
+        v = p[-1]
+        if v != u and v.lower() == u.lower():
+            p.pop()
+        else:
+            p.append(u)
+    return len(p) - 1
+
+print(collapse(letters)) #Part I
+print(min(collapse(c for c in letters if c.lower() != x) for x in ascii_lowercase)) #Part II
